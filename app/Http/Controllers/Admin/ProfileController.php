@@ -17,15 +17,32 @@ class ProfileController extends Controller
     {
         return redirect('admin/profile/create');
     }
+    // 以下を追記
 
-    public function edit()
+    public function edit(Request $request)
     {
-        return view('admin.profile.edit');
+        // News Modelからデータを取得する
+        $profile = News::find($request->id);
+        if (empty($news)) {
+            abort(404);
+        }
+        return view('admin.profile.edit', ['news_form' => $profile]);
     }
 
-    public function update()
+    public function update(Request $request)
     {
-        return redirect('admin/profile/edit');
+        // Validationをかける
+        $this->validate($request, News::$rules);
+        // News Modelからデータを取得する
+        $news = News::find($request->id);
+        // 送信されてきたフォームデータを格納する
+        $news_form = $request->all();
+        unset($profile_form['_token']);
+
+        // 該当するデータを上書きして保存する
+        $profile->fill($profile_form)->save();
+
+        return redirect('admin/profile');
     }
 }
 

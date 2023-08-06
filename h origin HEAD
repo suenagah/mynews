@@ -1,0 +1,53 @@
+[33mcommit 3844549a18f6264ed078f076783a862cca3ba17d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Rocky <ec2-user@ip-172-31-8-132.ap-southeast-2.compute.internal>
+Date:   Tue Aug 1 13:28:41 2023 +0000
+
+    app/Models/Profile.php
+
+[33mcommit 982bf95bce18d9702ae7fc255d803e7bd7788471[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Rocky <ec2-user@ip-172-31-8-132.ap-southeast-2.compute.internal>
+Date:   Mon Jul 31 12:34:27 2023 +0000
+
+    routes/web.php
+
+[33mcommit 6b11d22251034d00f8be68fc79112332fd60f692[m
+Author: Rocky <ec2-user@ip-172-31-8-132.ap-southeast-2.compute.internal>
+Date:   Sat Jul 29 06:40:33 2023 +0000
+
+    resources/views/layouts/profile.blade.php
+
+[33mcommit d94b1e256be71d3e318b91dfc98fb5dff44628d2[m
+Author: Rocky <ec2-user@ip-172-31-8-132.ap-southeast-2.compute.internal>
+Date:   Tue Jul 25 05:28:30 2023 +0000
+
+    github practice
+
+[33mcommit c3c56022c04b2a9dc178ba7ae4995e0614825160[m
+Author: Rocky <ec2-user@ip-172-31-8-132.ap-southeast-2.compute.internal>
+Date:   Sun Jul 23 06:32:12 2023 +0000
+
+    resources/views/admin/profile/create.blade.php
+
+[33mcommit 1ace57ea855a46b19b34bcefa64c1972f80b6981[m
+Author: Rocky <ec2-user@ip-172-31-8-132.ap-southeast-2.compute.internal>
+Date:   Fri Jul 21 13:49:33 2023 +0000
+
+    routes/web.php
+
+[33mcommit 2be8c0a1f9310ae57a42fb8ef129b5d5ccaa6319[m
+Author: Rocky <ec2-user@ip-172-31-8-132.ap-southeast-2.compute.internal>
+Date:   Thu Jul 20 13:08:43 2023 +0000
+
+    github practice
+
+[33mcommit 43504e025c727dbb9243b8fb6649ef6429b784ab[m
+Author: Rocky <ec2-user@ip-172-31-8-132.ap-southeast-2.compute.internal>
+Date:   Thu Jul 20 12:51:19 2023 +0000
+
+    modified README
+
+[33mcommit 4c765c8746f7770a36e85c319dd51abd1aa008a5[m
+Author: Rocky <ec2-user@ip-172-31-8-132.ap-southeast-2.compute.internal>
+Date:   Thu Jul 20 12:38:22 2023 +0000
+
+    first commit

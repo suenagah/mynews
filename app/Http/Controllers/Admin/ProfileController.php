@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 // 以下の1行を追記することで、News Modelが扱えるようになる
 use App\Models\Profile;
 
+// 以下を追記
+use App\Models\History2;
+
+// 以下を追記
+use Carbon\Carbon;
+
 class ProfileController extends Controller
 {
     //
@@ -43,7 +49,7 @@ class ProfileController extends Controller
         if (empty($profile)) {
             abort(404);
         }
-        return view('admin.profile.edit', ['news_form' => $profile]);
+        return view('admin.profile.edit', ['profile_form' => $profile]);
     }
 
     public function update(Request $request)
@@ -58,6 +64,12 @@ class ProfileController extends Controller
 
         // 該当するデータを上書きして保存する
         $profile->fill($profile_form)->save();
+        
+                // 以下を追記
+        $history = new History2();
+        $history->profile_id = $profile->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
 
         return redirect('admin/profile/edit?id=' . $profile->id);
     }

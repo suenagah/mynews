@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', '登録済みニュースの一覧')
+<p>テスト</p>
 
 @section('content')
     <div class="container">

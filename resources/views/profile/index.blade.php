@@ -1,54 +1,86 @@
 @extends('layouts.front')
 
+@section('title', '登録済みプロフィールの一覧')
+
 @section('content')
     <div class="container">
-        <hr color="#c0c0c0">
-        @if (!is_null($headline))
-            <div class="row">
-                <div class="headline col-md-10 mx-auto">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="caption mx-auto">
-
-                                    @endif
-                                </div>
-                                <div class="title p-2">
-                                    <h1>{{ Str::limit($headline->title, 70) }}</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="body mx-auto">{{ Str::limit($headline->body, 650) }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-        <hr color="#c0c0c0">
         <div class="row">
-            <div class="posts col-md-8 mx-auto mt-3">
-                @foreach($posts as $post)
-                    <div class="post">
-                        <div class="row">
-                            <div class="text col-md-6">
-                                <div class="date">
-                                    {{ $post->updated_at->format('Y年m月d日') }}
-                                </div>
-                                <div class="title">
-                                    {{ Str::limit($post->title, 150) }}
-                                </div>
-                                <div class="body mt-3">
-                                    {{ Str::limit($post->body, 1500) }}
-                                </div>
-                            </div>
-                                @endif
-                            </div>
+            <h2>プロフィール一覧</h2>
+        </div>
+        <div class="row">
+           
+            <div class="col-md-8">
+                <form action="{{ route('profile.index') }}" method="get">
+                    <div class="form-group row">
+                        <label class="col-md-2">名前</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="cond_name" value="{{ $cond_name }}">
+                        </div>
+                        <div class="col-md-4">
+                            @csrf
+                            <input type="submit" class="btn btn-primary" value="検索">
+                        </div>
+                        <div class="col-md-2">
+                            @if($profile)
+                            <a href="/profile/edit" class="btn btn-primary">プロフィール編集</a>
+                            @else
+                            <a href="/profile/create" class="btn btn-primary">プロフィール作成</a>
+                            @endif
+                            
                         </div>
                     </div>
-                    <hr color="#c0c0c0">
-                @endforeach
+                </form>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="list-news col-md-12 mx-auto">
+                <div class="row">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th width="10%">ID</th>
+                                <th width="20%">名前</th>
+                                <th width="20%">クライミング種類</th>
+                                <th width="20%">レベル</th>
+                                <th width="20%">都道府県</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($posts as $profile)
+                                <tr>
+                                    <th>{{ $profile->id }}</th>
+                                    <td>
+                                        <a href="/profile/{{$profile->id}}">{{ Str::limit($profile->name, 100) }}</a>
+                                    </td>
+                                    
+                                    <td>
+                                        @if($profile->climbing_type == 'bouldering')
+                                            ボルダリング
+                                        @elseif($profile->climbing_type == 'lead')
+                                            リード
+                                        @elseif($profile->climbing_type == 'everything')
+                                            すべて
+                                        @endif
+                                    </td>
+                                    
+                                    <td>
+                                        @if($profile->level == 'advanced')
+                                            上級
+                                        @elseif($profile->level == 'intermediate')
+                                            中級
+                                        @elseif($profile->level == 'beginner')
+                                            初級
+                                        @endif
+                                    </td>
+                                    
+                                    <td>{{ Str::limit($profile->prefecture, 250) }}</td>
+                                   
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

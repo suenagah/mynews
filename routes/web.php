@@ -25,17 +25,17 @@ Route::controller(NewsController::class)->prefix('admin')->name('admin.')->middl
 // Route::controller(AAAController::class)->group(function() {
 //     Route::get('XXX', 'bbb');
 // });
-use App\Http\Controllers\Admin\ProfileController;
-Route::controller(ProfileController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function() {
-    Route::get('profile/create', 'add')->name('profile.add');
-    Route::post('profile/create', 'create')->name('profile.create');
-    Route::get('profile/edit', 'edit')->name('profile.edit');
-    Route::post('profile/edit', 'update')->name('profile.update');
-    Route::get('profile/delete', 'delete')->name('profile.delete');
-});
+// use App\Http\Controllers\Admin\ProfileController;
+// Route::controller(ProfileController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function() {
+//     Route::get('profile/create', 'add')->name('profile.add');
+//     Route::post('profile/create', 'create')->name('profile.create');
+//     Route::get('profile/edit', 'edit')->name('profile.edit');
+//     Route::post('profile/edit', 'update')->name('profile.update');
+//     Route::get('profile/delete', 'delete')->name('profile.delete');
+// });
 
-use App\Http\ProfileControllers\ProfileController as PublicProfileController;
-Route::get('/profile', [PublicProfileController::class, 'index'])->name('profile.index');
+// use App\Http\Controllers\ProfileController as PublicProfileController;
+// Route::get('/profile', [PublicProfileController::class, 'index'])->name('profile.index');
 
 
 Auth::routes();
@@ -53,3 +53,21 @@ Route::controller(NewsController::class)->prefix('admin')->name('admin.')->middl
 
 use App\Http\Controllers\NewsController as PublicNewsController;
 Route::get('/', [PublicNewsController::class, 'index'])->name('news.index');
+
+use App\Http\Controllers\Admin\ApplicationController;
+Route::controller(ApplicationController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function() {
+    Route::get('application', 'index')->name('application.index');
+    Route::get('application/edit', 'edit')->name('application.edit');
+    Route::post('application/edit', 'update')->name('application.update');
+});
+
+use App\Http\Controllers\ProfileController;
+Route::controller(ProfileController::class)->middleware('auth')->group(function() {
+    Route::get('profile/index', 'index')->name('profile.index');
+    Route::get('profile/create', 'add')->name('profile.add');
+    Route::post('profile/create', 'create')->name('profile.create');
+    Route::get('profile/edit', 'edit')->name('profile.edit');
+    Route::post('profile/edit', 'update')->name('profile.update');
+    Route::get('profile/delete', 'delete')->name('profile.delete');
+    Route::get('/profile/{id}', 'show')->name('profile.show');
+});

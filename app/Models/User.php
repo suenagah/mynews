@@ -11,6 +11,16 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    
+    public static $rules = array(
+        'name' => 'required',
+        // 'gender' => 'required',
+        // 'age' => 'required',
+        // 'prefecture' => 'required',
+        // 'level' => 'required',
+        // 'climbing_type' => 'required',
+        // 'introduction' => 'required',
+    );
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +31,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'name',
+        'gender',
+        'age',
+        'prefecture',
+        'level',
+        'climbing_type',
+        'introduction',
+        
     ];
 
     /**

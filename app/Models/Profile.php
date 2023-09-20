@@ -8,18 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
+    // 以下を追記
     protected $guarded = array('id');
 
     public static $rules = array(
         'name' => 'required',
         'gender' => 'required',
-        'hobby' => 'required',
+        'age' => 'required',
+        'prefecture' => 'required',
+        'level' => 'required',
+        'climbing_type' => 'required',
         'introduction' => 'required',
     );
-    
-    // Profile Modelに関連付けを行う
-    public function histories2()
-    {
-        return $this->hasMany('App\Models\History2');
-    }
 }

@@ -49,6 +49,7 @@
                             <!-- Authentication Links -->
                             @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('messages.login') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}">新規登録</a></li>
                             @else
                             <li class="nav-item dropdown">
                                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

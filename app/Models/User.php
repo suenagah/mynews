@@ -59,4 +59,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    // Articleとの一対多のリレーションメソッドを定義
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use App\Models\Message; // 追記
 use Illuminate\Support\Facades\Auth;
 // 追記
 
@@ -18,7 +19,7 @@ class ProfileController extends Controller
             $posts = Profile::where('name', $cond_name)->get();
         } else {
             // それ以外はすべてのニュースを取得する
-            $posts = Profile::all();
+            $posts = Profile::where('user_id', '!=', Auth::user()->id)->get();
         }
             $profile = Profile::where('user_id',  Auth::user()->id)->first();
         return view('profile.index', ['posts' => $posts, 'cond_name' => $cond_name, 'profile' => $profile]);
@@ -108,7 +109,36 @@ class ProfileController extends Controller
     {
         
         $profile = Profile::findOrFail($id);
-        return view('profile.show', ['profile' => $profile]);
+        // $messages = Message::where('from_user_id', \Auth::id())->get();
+        $valueA = \Auth::id();
+        $valueB = $profile->user_id;
+
+        $messages = Message::where(function ($query) use ($valueA, $valueB) {
+    $query->where('from_user_id', $valueA)
+          ->where('to_user_id', $valueB);
+})->orWhere(function ($query) use ($valueA, $valueB) {
+    $query->where('from_user_id', $valueB)
+          ->where('to_user_id', $valueA);
+})->get();
+        // var_dump($messages);
+        // dd($profile);
+        return view('profile.show', ['profile' => $profile, 'messages'=> $messages]);
+    }
+    public function message(Request $request)
+    {
+        // dd($request);
+        // 以下を追記
+        // Validationを行う
+        $this->validate($request, Message::$rules);
+
+        $message = new Message;
+        $message->from_user_id = \Auth::id(); // 一行追加
+        $message->to_user_id = $request->user_id;
+        $message->message = $request->send_message;
+        $message->is_new = 1;
+        $message->save();
+        $form = $request->all();
+        return redirect('/profile/' . $request->user_id);
     }
     
     //

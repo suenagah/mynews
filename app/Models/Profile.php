@@ -20,4 +20,9 @@ class Profile extends Model
         'climbing_type' => 'required',
         'introduction' => 'required',
     );
+    // News Modelに関連付けを行う
+    public function messages()
+    {
+        return $this->hasMAny(Message::class);
+    }
 }

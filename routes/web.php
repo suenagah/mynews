@@ -69,5 +69,6 @@ Route::controller(ProfileController::class)->middleware('auth')->group(function(
     Route::get('profile/edit', 'edit')->name('profile.edit');
     Route::post('profile/edit', 'update')->name('profile.update');
     Route::get('profile/delete', 'delete')->name('profile.delete');
-    Route::get('/profile/{id}', 'show')->name('profile.show');
+    Route::get('/profile/{id}', 'show')->name('profile.show')->where('id', '[0-9]+');
+    Route::post('profile/message', 'message')->name('profile.message');
 });

@@ -41,8 +41,9 @@
                                 <th width="10%">ID</th>
                                 <th width="20%">名前</th>
                                 <th width="20%">クライミング種類</th>
-                                <th width="20%">レベル</th>
+                                <th width="10%">レベル</th>
                                 <th width="20%">都道府県</th>
+                                <th width="10%">メッセージを送る</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,6 +75,7 @@
                                     </td>
                                     
                                     <td>{{ Str::limit($profile->prefecture, 250) }}</td>
+                                    <td><a href="/profile/{{$profile->id}}"><img src="{{ asset('image/kkrn_icon_mail_9.png') }}" width="36"></a></td>
                                    
                                 </tr>
                             @endforeach

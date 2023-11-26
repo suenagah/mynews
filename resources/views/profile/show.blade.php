@@ -11,6 +11,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>プロフィール</h2>
+                
                 <table>
                     <tr>
                         <td>ニックネーム</td>
@@ -67,9 +68,32 @@
                         <td><img src="{{ asset('storage/image/' . $profile->image_path) }}" alt="Image"></td>
                     </tr>
                 </table>
-                  
-                   
+                    <form action="{{ route('profile.message') }}" method="post" >
+                    <div class="form-group row">
+                        <label class="col-md-2">メッセージを送る</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="send_message" rows="1">{{ old('send_message') }}</textarea>
+                            <input type="hidden" id="user_id" name="user_id" value="{{$profile->user_id}}" />
+                        </div>
+                    </div>
+                    @csrf
+                    <input type="submit" class="btn btn-primary" value="送信">
+                    </form>  
+                    @foreach($messages as $message)
+                    <!--<hr>-->
+                    <!--<li>{{ $message->fromUser->name }}</li>-->
+                    <!--<li>{{ $message->message }}</li>-->
+                    @php
+                      $align_css = ($message->from_user_id == Auth::user()->id) ? 'text-end' : '';
+                    @endphp
+                    <p class="{{ $align_css }}">
+                        <span class="truncate">{{$message->message}}</span><br />
+                        <span class="initialism">{{$message->created_at}} ＠{{$message->fromUser->name}}</span>
+                    </p>
+                    @endforeach
             </div>
         </div>
+        
+        
     </div>
 @endsection
